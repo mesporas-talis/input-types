@@ -1,21 +1,21 @@
-name: CI
+name: BE ETL Automation Tests
+
+env:
+  exp_key_default: "TestData/SCIP7-SN0010ZMS204100004/001155_20220107_000523"
+  post_to_jira: false
 
 on:
   workflow_dispatch:
     inputs:
-      environment:
-        type: environment
-        description: Select the environment
-      boolean:
+      exp_key:
+        description: 'S3 object path within S3 bucket qa-workbench-data-lake e.g. Data/SCIP-XYZABC/TEST-NUM_DATE_TIME'
+        required: true
+        default: 'TestData/SCIP7-SN0010ZMS204100004/001155_20220107_000523'
+      post_to_jira:
+        description: 'Post results to jira?'
+        required: true
+        default: false
         type: boolean
-        description: True or False
-      choice:
-        type: choice
-        description: Make a choice
-        options:
-        - foo
-        - bar
-        - baz
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,7 +25,10 @@ jobs:
 
       - name: greet
         run: | 
-          echo "environment is ${{ github.event.inputs.environment }}"
-          echo "boolean is ${{ github.event.inputs.boolean }}"
-          echo "choice is ${{ github.event.inputs.choice }}"
-          
+          echo "exp_key is ${{ github.event.inputs.exp_key }}"
+          echo "post_to_jira is ${{ github.event.inputs.post_to_jira }}"
+
+      - name: test post to jira
+        if: ${{ github.events.inputs.post_to_jira || env.post_to_jira }}
+        run: |
+          echo "Post to jira is true"

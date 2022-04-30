@@ -26,7 +26,7 @@ jobs:
       - name: greet
         run: | 
           echo "exp_key is ${{ github.event.inputs.exp_key }}"
-          echo "post_to_jira is ${{ github.event.inputs.post_to_jira }}"
+          echo "post_to_jira is ${{ github.event.inputs.post_to_jira || env.post_to_jira }}"
 
       - name: test post to jira
         if: ${{ (github.events.inputs.post_to_jira || env.post_to_jira) == true }}

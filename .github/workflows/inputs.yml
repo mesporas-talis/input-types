@@ -29,6 +29,6 @@ jobs:
           echo "post_to_jira is ${{ github.event.inputs.post_to_jira }}"
 
       - name: test post to jira
-        if: ${{ github.events.inputs.post_to_jira || env.post_to_jira }}
+        if: ${{ github.events.inputs.post_to_jira || env.post_to_jira == true }}
         run: |
           echo "Post to jira is true"

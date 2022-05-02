@@ -27,6 +27,9 @@ jobs:
         run: | 
           echo "exp_key is ${{ github.event.inputs.exp_key }}"
           echo "post_to_jira is ${{ github.event.inputs.post_to_jira || env.post_to_jira }}"
+          echo "input is ${{ github.event.inputs.post_to_jira }}"
+          echo "env variable default is ${{ env.post_to_jira }}
+          echo "post_to_jira is ${{ github.event.inputs.post_to_jira || env.post_to_jira }}"
           echo "The result of this expression is ${{ ( github.events.inputs.post_to_jira || env.post_to_jira ) == true }}"
           echo "The result of this expression is ${{ ( github.events.inputs.post_to_jira || env.post_to_jira ) }}"
           echo "The result of this expression is ${{ ( true || false ) == true }} Expecting true."

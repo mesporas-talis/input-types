@@ -29,7 +29,7 @@ jobs:
           echo "Post to jira input"
           
       - name: test post to jira input explicit boolean
-        if: ${{ inputs.post_to_jira == "true" }}
+        if: ${{ inputs.post_to_jira == 'true' }}
         run: |
           echo "Post to jira input"
       
@@ -39,12 +39,12 @@ jobs:
           echo "Post to jira environment variable"
           
       - name: test post to jira environment variable explicit boolean
-        if: ${{ env.post_to_jira_env == "false" }}
+        if: ${{ env.post_to_jira_env == 'false' }}
         run: |
           echo "Post to jira environment variable"
   
       - name: test post to jira or statement explicit string
-        if: ${{ inputs.post_to_jira == "true" || env.post_to_jira_env == "false" }}
+        if: ${{ inputs.post_to_jira == 'true' || env.post_to_jira_env == 'false' }}
         run: |
           echo "Post to jira or statement"
           

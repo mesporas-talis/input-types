@@ -2,7 +2,7 @@ name: BE ETL Automation Tests
 
 env:
   exp_key_default: "TestData/SCIP7-SN0010ZMS204100004/001155_20220107_000523"
-  post_to_jira: false
+  post_to_jira_env: false
 
 on:
   workflow_dispatch:
@@ -23,50 +23,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: greet
-        run: | 
-          echo "exp_key is ${{ github.event.inputs.exp_key }}"
-          echo "post_to_jira is ${{ github.event.inputs.post_to_jira || env.post_to_jira }}"
-          echo "input is ${{ github.event.inputs.post_to_jira }}"
-          echo "env variable default is ${{ env.post_to_jira }}"
-          echo "post_to_jira is ${{ github.event.inputs.post_to_jira || env.post_to_jira }}"
-          echo "The result of this expression is ${{ ( github.events.inputs.post_to_jira || env.post_to_jira ) == true }}"
-          echo "The result of this expression is ${{ ( github.events.inputs.post_to_jira || env.post_to_jira ) }}"
-          echo "The result of this expression is ${{ ( true || false ) == true }} Expecting true."
-          echo "The result of this expression is ${{ ( false || false ) == true }} Expecting false."
-          echo "The result of this expression is ${{ ( false || false )}} Expecting false."
-          echo "The result of this expression is ${{ ( true || false )}} Expecting true."
-
       - name: test post to jira input
         if: github.events.inputs.post_to_jira
         run: |
-          echo "Post to jira within parenthesis"
-          echo "Post to jira is true"
+          echo "Post to jira input"
       
       - name: test post to jira environment variable
-        if: env.post_to_jira
+        if: env.post_to_jira_env
         run: |
-          echo "Post to jira within parenthesis"
-          echo "Post to jira is true"
-      
-      
-      - name: test post to jira
-        if: ( github.events.inputs.post_to_jira || env.post_to_jira )
+          echo "Post to jira environment variable"
+  
+      - name: test post to jira environment variable
+        if: github.events.inputs.post_to_jira || env.post_to_jira_env
         run: |
-          echo "Post to jira within parenthesis"
-          echo "Post to jira is true"
-          
-      - name: test post to jira 2
-        if: ${{ (github.events.inputs.post_to_jira || env.post_to_jira) == true }}
-        run: |
-          echo "Post to jira within parenthesis == true"
-          echo "Post to jira is true"
-          
-      - name: test post to jira 3
-        if: github.events.inputs.post_to_jira || env.post_to_jira
-        run: |
-          echo "Post to jira without parenthesis"
-          echo "Post to jira is true"
-             
-
-
+          echo "Post to jira or statement"

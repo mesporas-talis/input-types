@@ -23,11 +23,11 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: test post to jira input implied boolean
-        if: inputs.post_to_jira
+        if: github.event.inputs.post_to_jira
         run: |
           echo "Post to jira input"
           
       - name: test post to jira input explicit boolean
-        if: ${{ inputs.post_to_jira == 'true' }}
+        if: ${{ github.event.inputs.post_to_jira == 'true' }}
         run: |
           echo "Post to jira input"

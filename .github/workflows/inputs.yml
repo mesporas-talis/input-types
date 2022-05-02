@@ -21,9 +21,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: test post to jira input implied boolean
-        if: github.event.inputs.post_to_jira
+          
+      - name: test post to jira input evaluated..
+        if: ${{ github.event.inputs.post_to_jira }}
         run: |
           echo "Post to jira input"
           

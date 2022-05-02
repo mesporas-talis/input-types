@@ -37,16 +37,6 @@ jobs:
         if: env.post_to_jira_env
         run: |
           echo "Post to jira environment variable"
-      
-      - name: test post to jira environment variable implied boolean without env
-        if: post_to_jira_env
-        run: |
-          echo "Post to jira environment variable"
-          
-      - name: test post to jira environment variable explicit boolean without envs
-        if: ${{ post_to_jira_env == "false" }}
-        run: |
-          echo "Post to jira environment variable"
           
       - name: test post to jira environment variable explicit boolean
         if: ${{ env.post_to_jira_env == "false" }}

@@ -35,7 +35,7 @@ jobs:
           echo "The result of this expression is ${{ ( true || false )}} Expecting true."
 
       - name: test post to jira
-        if: ${{ ( github.events.inputs.post_to_jira || env.post_to_jira ) }}
+        if: ( github.events.inputs.post_to_jira || env.post_to_jira )
         run: |
           echo "Post to jira within parenthesis"
           echo "Post to jira is true"
@@ -47,7 +47,7 @@ jobs:
           echo "Post to jira is true"
           
       - name: test post to jira 3
-        if: ${{ github.events.inputs.post_to_jira || env.post_to_jira }}
+        if: github.events.inputs.post_to_jira || env.post_to_jira
         run: |
           echo "Post to jira without parenthesis"
           echo "Post to jira is true"
